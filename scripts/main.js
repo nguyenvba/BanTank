@@ -1,11 +1,40 @@
-var context;
+var TankOnline = {};
 
 window.onload = function(){
-  var canvas = document.createElement("canvas");
-  document.body.appendChild(canvas);
+  TankOnline.game= new Phaser.Game( window.innerWidth,
+                                    window.innerHeight,
+                                    Phaser.AUTO,
+                                    '',
+                                    { preload: preload, create: create, update: update });
+}
+var tank;
+var preload = function(){
+  TankOnline.game.load.image('tankDown', './images/tank_player1_down_c0_t1_s1.png');
+  TankOnline.game.load.image('tankUp', './images/tank_player1_up_c0_t1_s1.png');
+  TankOnline.game.load.image('tankLeft', './images/tank_player1_left_c0_t1_s1.png');
+  TankOnline.game.load.image('tankRight', './images/tank_player1_right_c0_t1_s1.png');
+}
+var create = function(){
+  //sprite: object trong game
+  //tank = TankOnline.game.add.sprite(window.innerWidth/2, window.innerHeight/2, 'tankDown');
+  TankOnline.game.physics.startSystem(Phaser.Physics.ARCADE);
+  //TankOnline.game.physics.arcade.enable(tank);
+  TankOnline.keyboard = TankOnline.game.input.keyboard;
 
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  tank =new Tank(window.innerWidth/2, window.innerHeight/2);
+  tank2 =new Tank(window.innerWidth/2 -200, window.innerHeight/2);
+}
+var update = function(){
+  var directionX, directionY;
+  if(TankOnline.keyboard.isDown(Phaser.KeyCode.LEFT)) directionX = -1;
+  else if(TankOnline.keyboard.isDown(Phaser.KeyCode.RIGHT)) directionX= 1;
+  else directionX = 0;
 
-  context = canvas.getContext("2d");
+  if(TankOnline.keyboard.isDown(Phaser.KeyCode.UP)) directionY=-1;
+  else if (TankOnline.keyboard.isDown(Phaser.KeyCode.DOWN)) directionY=1;
+  else directionY =0;
+
+  tank.update(directionX,directionY);
+  tank2.update(directionX, directionY);
+
 }
