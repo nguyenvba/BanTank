@@ -13,6 +13,7 @@ var preload = function(){
   TankOnline.game.load.image('tankUp', './images/tank_player1_up_c0_t1_s1.png');
   TankOnline.game.load.image('tankLeft', './images/tank_player1_left_c0_t1_s1.png');
   TankOnline.game.load.image('tankRight', './images/tank_player1_right_c0_t1_s1.png');
+  TankOnline.game.load.image('bulletRight', './images/bullet_right.png');
 }
 var create = function(){
   //sprite: object trong game
@@ -23,6 +24,7 @@ var create = function(){
 
   tank =new Tank(window.innerWidth/2, window.innerHeight/2);
   tank2 =new Tank(window.innerWidth/2 -200, window.innerHeight/2);
+  bullet = new Bullet(window.innerWidth/2 - 500 ,window.innerHeight/2 - 100);
 }
 var update = function(){
   var directionX, directionY;
@@ -37,4 +39,7 @@ var update = function(){
   tank.update(directionX,directionY);
   tank2.update(directionX, directionY);
 
+  if(TankOnline.keyboard.isDown(Phaser.KeyCode.SPACEBAR)) directionX=1;
+  else directionX =0;
+  bullet.update(directionX);
 }
