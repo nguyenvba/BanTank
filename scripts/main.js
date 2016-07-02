@@ -260,6 +260,8 @@ var onBulletHitWall = function(bulletSprite, wallSprite){
 }
 
 var onBulletHitTank = function(bulletSprite, tankSprite){
-  tankSprite.damage(bulletSprite.bulletDamage);
-  bulletSprite.kill();
+  if(bulletSprite.tankSprite != tankSprite){
+    tankSprite.damage(bulletSprite.bulletDamage);
+    bulletSprite.kill();
+  }
 }
