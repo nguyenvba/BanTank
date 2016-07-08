@@ -18,7 +18,7 @@ class Bullet{
     this.sprite.anchor.set(0.5,0.5);
 
     this.sprite.body.velocity = new Phaser.Point(tank.direction.x * 500, tank.direction.y * 500);
-    this.sprite.bulletDamage =1;
+    this.sprite.bulletDamage = 1;
     this.sprite.tankSprite = tank.sprite;
   }
 }
